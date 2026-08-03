@@ -1,5 +1,10 @@
 # CNN Architectures
 
-This repository contains implementations of popular CNN architectures in both TensorFlow and PyTorch.
-Each architecture is implemented using equivalent designs to enable easy comparison between the two frameworks.
-The goal is to explore, train, and evaluate CNN models across both implementations.
+This Project Provides Minimal, Standalone Implementations of Popular Convolutional Neural Network (CNN) Architectures That Can Be Imported And Used Independently.
+
+Built With PyTorch And TensorFlow, The Collection Is Lightweight, Easy To Understand, And Designed For Learning, Experimentation, And Integration Into Larger Deep Learning Projects.
+
+**Included Architectures:**
+- LeNet-5
+- AlexNet
+- VGGNet
