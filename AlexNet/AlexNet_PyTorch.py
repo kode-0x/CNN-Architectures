@@ -22,12 +22,12 @@ class AlexNet(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
+            nn.Dropout(p=0.5),
             nn.Linear(256 * 6 * 6, 4096),
             nn.ReLU(inplace=True),
             nn.Dropout(p=0.5),
             nn.Linear(4096, 4096),
             nn.ReLU(inplace=True),
-            nn.Dropout(p=0.5),
             nn.Linear(4096, 1000),
         )
 

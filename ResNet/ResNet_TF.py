@@ -3,7 +3,7 @@ from tensorflow.keras import layers
 
 
 class BasicBlock(tf.keras.layers.Layer):
-    def __init__(self, filters, strides=1):
+    def __init__(self, in_channels, filters, strides=1):
         super().__init__()
         self.conv1 = layers.Conv2D(filters, 3, strides=strides, padding="same", use_bias=False)
         self.bn1 = layers.BatchNormalization()
@@ -11,7 +11,7 @@ class BasicBlock(tf.keras.layers.Layer):
         self.bn2 = layers.BatchNormalization()
         self.relu = layers.ReLU()
         self.downsample = None
-        if strides != 1:
+        if strides != 1 or in_channels != filters:
             self.downsample = tf.keras.Sequential(
                 [
                     layers.Conv2D(filters, 1, strides=strides, use_bias=False),
@@ -44,10 +44,10 @@ class ResNet(tf.keras.Model):
                 layers.MaxPooling2D(pool_size=3, strides=2, padding="same"),
             ]
         )
-        self.layer1 = tf.keras.Sequential([BasicBlock(64), BasicBlock(64)])
-        self.layer2 = tf.keras.Sequential([BasicBlock(128, 2), BasicBlock(128)])
-        self.layer3 = tf.keras.Sequential([BasicBlock(256, 2), BasicBlock(256)])
-        self.layer4 = tf.keras.Sequential([BasicBlock(512, 2), BasicBlock(512)])
+        self.layer1 = tf.keras.Sequential([BasicBlock(64, 64), BasicBlock(64, 64)])
+        self.layer2 = tf.keras.Sequential([BasicBlock(64, 128, strides=2), BasicBlock(128, 128)])
+        self.layer3 = tf.keras.Sequential([BasicBlock(128, 256, strides=2), BasicBlock(256, 256)])
+        self.layer4 = tf.keras.Sequential([BasicBlock(256, 512, strides=2), BasicBlock(512, 512)])
         self.classifier = tf.keras.Sequential([layers.GlobalAveragePooling2D(), layers.Dense(1000)])
 
     def call(self, inputs, training=None, mask=None):

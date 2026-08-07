@@ -7,7 +7,7 @@ class AlexNet(tf.keras.Model):
         super().__init__()
         self.features = tf.keras.Sequential(
             [
-                layers.Conv2D(96, kernel_size=11, strides=4, activation="relu", input_shape=(227, 227, 3)),
+                layers.Conv2D(96, kernel_size=11, strides=4, activation="relu"),
                 layers.MaxPooling2D(pool_size=3, strides=2),
                 layers.Conv2D(256, kernel_size=5, padding="same", activation="relu"),
                 layers.MaxPooling2D(pool_size=3, strides=2),
@@ -20,10 +20,10 @@ class AlexNet(tf.keras.Model):
         self.classifier = tf.keras.Sequential(
             [
                 layers.Flatten(),
-                layers.Dense(4096, activation="relu"),
                 layers.Dropout(0.5),
                 layers.Dense(4096, activation="relu"),
                 layers.Dropout(0.5),
+                layers.Dense(4096, activation="relu"),
                 layers.Dense(1000),
             ]
         )

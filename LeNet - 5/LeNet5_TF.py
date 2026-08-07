@@ -7,7 +7,7 @@ class LeNet5(tf.keras.Model):
         super().__init__()
         self.features = tf.keras.Sequential(
             [
-                layers.Conv2D(6, kernel_size=5, activation="tanh", input_shape=(32, 32, 1)),
+                layers.Conv2D(6, kernel_size=5, activation="tanh"),
                 layers.AveragePooling2D(pool_size=2, strides=2),
                 layers.Conv2D(16, kernel_size=5, activation="tanh"),
                 layers.AveragePooling2D(pool_size=2, strides=2),

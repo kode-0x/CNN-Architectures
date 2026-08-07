@@ -25,12 +25,12 @@ class DenseLayer(tf.keras.layers.Layer):
 class DenseBlock(tf.keras.layers.Layer):
     def __init__(self, in_channels, growth_rate, num_layers):
         super().__init__()
-        self.layers = [DenseLayer(in_channels + i * growth_rate, growth_rate) for i in range(num_layers)]
+        self.dense_layers = [DenseLayer(in_channels + i * growth_rate, growth_rate) for i in range(num_layers)]
 
     def call(self, inputs, training=False):
         features = [inputs]
         x = inputs
-        for layer in self.layers:
+        for layer in self.dense_layers:
             out = layer(x, training=training)
             features.append(out)
             x = tf.concat(features, axis=-1)

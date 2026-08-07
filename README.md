@@ -13,3 +13,4 @@ Built With PyTorch And TensorFlow, The Collection Is Lightweight, Easy To Unders
 - VGGNet
 - ResNet
 - DenseNet
+- EfficientNet-B0
